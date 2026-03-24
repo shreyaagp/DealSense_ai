@@ -546,23 +546,27 @@ def main():
             key=f"chat_input_{st.session_state.input_key}",
         )
 
-        if user_input and user_input.strip():
-            # Record user message
-            state.add_message("user", user_input.strip())
+        if user_input and user_input.strip() and not st.session_state.get("generating", False):
 
-            with st.spinner("Buyer is responding..."):
-                buyer_response, should_end = sim_engine.generate_buyer_response(
-                    state, user_input.strip()
-                )
+                st.session_state.generating = True
 
-            # Record buyer response
-            state.add_message("assistant", buyer_response)
-            st.session_state.input_key += 1
+                # Record user message
+                state.add_message("user", user_input.strip())
+                with st.spinner("Buyer is responding..."):
+                    buyer_response, should_end = sim_engine.generate_buyer_response(
+                        state, user_input.strip()
+                    )
 
-            if should_end:
-                state.transition_to_evaluation()
+                # Record buyer response
+                state.add_message("assistant", buyer_response)
 
-            st.rerun()
+                st.session_state.input_key += 1
+                st.session_state.generating = False
+
+                if should_end:
+                    state.transition_to_evaluation()
+
+                st.rerun()
 
         # End simulation button
         col_e1, col_e2 = st.columns([1, 5])

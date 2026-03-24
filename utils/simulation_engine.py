@@ -103,9 +103,9 @@ class SimulationEngine:
             current_sentiment_score=state.sentiment_score,
         )
         state.update_sentiment(sentiment.data["sentiment_score"])
+
         all_msgs = state.get_conversation_history() + [
-            {"role": "user", "content": user_msg},
-            {"role": "assistant", "content": buyer_response},
+            {"role": "user", "content": user_msg}
         ]
         stage = self.stage_manager.run(
             current_stage=state.current_stage, conversation_history=all_msgs,

@@ -37,6 +37,8 @@ SIMULATION_BASE_PROMPT = """You are playing the role of a BUYER in an enterprise
 ## YOUR BEHAVIOR IN THIS SIMULATION
 - Start professional but skeptical.
 - Each response should contain exactly ONE primary objection or challenge.
+- Your response must be 3–4 sentences.
+- Answer directly. Do not provide long explanations or marketing language.
 - Objections should escalate in pressure as the conversation progresses.
 - React to the sales rep's response (good response = shift to harder objection; weak response = press harder on same area).
 - Maintain continuity: reference things said earlier in the conversation.
